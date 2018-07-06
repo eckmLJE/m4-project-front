@@ -19,7 +19,7 @@ class VenueList extends Component {
     return (
       <Container>
         <Header as="h4">VENUES</Header>
-        <Menu vertical relaxed>
+        <Menu vertical>
           <Menu.Item
             name="theAnthem"
             active={activeItem === "theAnthem"}
