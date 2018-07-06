@@ -55,28 +55,30 @@ class TicketsContainer extends Component {
 
   render() {
     return (
-      <Grid padded columns={3}>
-        <button onClick={() => console.log(this.state)}>show state</button>
-        <Grid.Row>
-          <Grid.Column width={3}>
-            <VenueList fetchConcerts={this.fetchConcerts} />
-          </Grid.Column>
-          <Grid.Column width={4}>
-            <ConcertList
-              concerts={this.state.concerts}
-              setConcert={this.setConcert}
-            />
-          </Grid.Column>
-          <Grid.Column width={7}>
-            {this.state.currentConcert ? (
-              <ConcertDetails
-                concert={this.findConcert(this.state.currentConcert)}
+      <div className="tickets-container">
+        <Grid padded columns={3}>
+          <button onClick={() => console.log(this.state)}>show state</button>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <VenueList fetchConcerts={this.fetchConcerts} />
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <ConcertList
+                concerts={this.state.concerts}
+                setConcert={this.setConcert}
               />
-            ) : null}
-          </Grid.Column>
-          <Grid.Column width={2}></Grid.Column>
-        </Grid.Row>
-      </Grid>
+            </Grid.Column>
+            <Grid.Column width={7}>
+              {this.state.currentConcert ? (
+                <ConcertDetails
+                  concert={this.findConcert(this.state.currentConcert)}
+                />
+              ) : null}
+            </Grid.Column>
+            <Grid.Column width={2} />
+          </Grid.Row>
+        </Grid>
+      </div>
     );
   }
 }

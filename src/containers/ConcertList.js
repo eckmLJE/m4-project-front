@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Header, Menu } from "semantic-ui-react";
+import { Container, Header, Menu, Image } from "semantic-ui-react";
 
 class ConcertList extends Component {
   constructor(props) {
@@ -26,6 +26,7 @@ class ConcertList extends Component {
               name={concert.id}
               onClick={this.handleItemClick}
             >
+              <Image src={concert.images.find(image => image.width > 500).url} />
               <Header as="h4">{concert.name}</Header>
               <p>{concert.dates.start.localDate}</p>
             </Menu.Item>

@@ -19,7 +19,7 @@ class VenueList extends Component {
     return (
       <Container>
         <Header as="h4">VENUES</Header>
-        <Menu vertical>
+        <Menu fluid vertical>
           <Menu.Item
             name="theAnthem"
             active={activeItem === "theAnthem"}
@@ -46,7 +46,7 @@ class VenueList extends Component {
             active={activeItem === "nineThirtyClub"}
             onClick={this.handleItemClick}
           >
-            9:30 CLUB
+            9:30 Club
           </Menu.Item>
           <Menu.Item
             name="rockAndRollHotel"
