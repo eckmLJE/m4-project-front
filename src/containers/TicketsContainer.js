@@ -6,6 +6,16 @@ import ConcertDetails from "../components/ConcertDetails";
 import tmApiKey from "../tmApiKey";
 
 const url = tmApiKey;
+const venueUrl = "&venueId=";
+const sortUrl = "&sort=date,asc&page=0&size=20";
+
+const venueIds = {
+  rockAndRollHotel: "KovZpZAEk7aA",
+  nineThirtyClub: "KovZpZA7knFA",
+  theAnthem: "KovZ917A3Y7",
+  echoStage: "KovZpZAadt7A",
+  blackCat: "KovZpZA1k1IA"
+};
 
 class TicketsContainer extends Component {
   constructor(props) {
@@ -17,8 +27,8 @@ class TicketsContainer extends Component {
     };
   }
 
-  fetchConcerts = () => {
-    fetch(url)
+  fetchConcerts = venueName => {
+    fetch(url + venueUrl + venueIds[`${venueName}`] + sortUrl)
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -28,16 +38,14 @@ class TicketsContainer extends Component {
   };
 
   componentDidMount = () => {
-    this.fetchConcerts();
+    this.fetchConcerts("theAnthem");
   };
 
   findConcert = id => {
-    console.log("findConcert reached with", id);
     return this.state.concerts.find(concert => concert.id == id);
   };
 
   setConcert = id => {
-    console.log(id, "setConcert reached with id");
     this.setState({
       currentConcert: id
     });
@@ -46,12 +54,12 @@ class TicketsContainer extends Component {
   render() {
     return (
       <div className="grid-container">
-        <VenueList />
+        <VenueList fetchConcerts={this.fetchConcerts} />
         <ConcertList
           concerts={this.state.concerts}
           setConcert={this.setConcert}
         />
-        {this.state.currentVenue ? (
+        {this.state.currentConcert ? (
           <ConcertDetails
             concert={this.findConcert(this.state.currentConcert)}
           />

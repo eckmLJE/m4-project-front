@@ -1,7 +1,7 @@
 import React from "react";
 
-const ConcertDetails = ({ concert }) => {
-  return <div>{concert.name}</div>;
+const ConcertDetails = props => {
+  return <div>{props.concert.name}</div>;
 };
 
 export default ConcertDetails;
