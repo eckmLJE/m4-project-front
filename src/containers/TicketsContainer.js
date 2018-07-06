@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Grid, Image } from "semantic-ui-react";
 
 import VenueList from "./VenueList";
 import ConcertList from "./ConcertList";
@@ -28,6 +29,7 @@ class TicketsContainer extends Component {
   }
 
   fetchConcerts = venueName => {
+    this.setState({ currentConcert: null });
     fetch(url + venueUrl + venueIds[`${venueName}`] + sortUrl)
       .then(res => res.json())
       .then(data =>
@@ -53,18 +55,27 @@ class TicketsContainer extends Component {
 
   render() {
     return (
-      <div className="grid-container">
-        <VenueList fetchConcerts={this.fetchConcerts} />
-        <ConcertList
-          concerts={this.state.concerts}
-          setConcert={this.setConcert}
-        />
-        {this.state.currentConcert ? (
-          <ConcertDetails
-            concert={this.findConcert(this.state.currentConcert)}
-          />
-        ) : null}
-      </div>
+      <Grid padded columns={3}>
+        {/* <button onClick={() => console.log(this.state)}>show state</button> */}
+        <Grid.Row>
+          <Grid.Column width={3}>
+            <VenueList fetchConcerts={this.fetchConcerts} />
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <ConcertList
+              concerts={this.state.concerts}
+              setConcert={this.setConcert}
+            />
+          </Grid.Column>
+          <Grid.Column width={9}>
+            {this.state.currentConcert ? (
+              <ConcertDetails
+                concert={this.findConcert(this.state.currentConcert)}
+              />
+            ) : null}
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Menu } from 'semantic-ui-react'
 
 import TicketsContainer from "./containers/TicketsContainer";
 
@@ -11,9 +12,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="header">
-          <h1>TICKETS TICKETS TICKETS</h1>
-        </div>
+        <Menu>
+          <Menu.Item header>TICKETS TICKETS TICKETS</Menu.Item>
+        </Menu>
         <TicketsContainer />
       </div>
     );
