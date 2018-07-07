@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Container, Header, Menu, Image } from "semantic-ui-react";
+import { Container, Header, Menu } from "semantic-ui-react";
+import moment from "moment";
 
 class ConcertList extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class ConcertList extends Component {
   render() {
     const { activeItem } = this.state;
     return (
-      <Container>
+      <Container className="concertList">
+        <br />
         <Header as="h4">CONCERTS</Header>
         <Menu fluid vertical>
           {this.props.concerts.map(concert => (
@@ -26,9 +28,11 @@ class ConcertList extends Component {
               name={concert.id}
               onClick={this.handleItemClick}
             >
-              <Image src={concert.images.find(image => image.width > 500).url} />
+              {/* <Image size="medium" src={concert.images.find(image => image.width > 500).url} /> */}
               <Header as="h4">{concert.name}</Header>
-              <p>{concert.dates.start.localDate}</p>
+              <p>
+                {moment(concert.dates.start.localDate).format("MMMM Do, YYYY")}
+              </p>
             </Menu.Item>
           ))}
         </Menu>

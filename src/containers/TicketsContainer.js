@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Image } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 import VenueList from "./VenueList";
 import ConcertList from "./ConcertList";
@@ -9,6 +9,8 @@ import tmApiKey from "../tmApiKey";
 const url = tmApiKey;
 const venueUrl = "&venueId=";
 const sortUrl = "&sort=date,asc&page=0&size=20";
+
+const eventsUrl = "http://localhost:3000/api/v1/events";
 
 const venueIds = {
   rockAndRollHotel: "KovZpZAEk7aA",
@@ -44,7 +46,7 @@ class TicketsContainer extends Component {
   };
 
   findConcert = id => {
-    return this.state.concerts.find(concert => concert.id == id);
+    return this.state.concerts.find(concert => concert.id === id);
   };
 
   setConcert = id => {
@@ -53,32 +55,46 @@ class TicketsContainer extends Component {
     });
   };
 
+  postEvent = event => {
+    let body = JSON.stringify(event);
+    fetch(eventsUrl, {
+      method: "POST",
+      body: body,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    });
+    // .then(() => window.history.pushState())
+  };
+
   render() {
     return (
-      <div className="tickets-container">
-        <Grid padded columns={3}>
-          <button onClick={() => console.log(this.state)}>show state</button>
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <VenueList fetchConcerts={this.fetchConcerts} />
-            </Grid.Column>
-            <Grid.Column width={4}>
-              <ConcertList
-                concerts={this.state.concerts}
-                setConcert={this.setConcert}
+      <Grid padded columns={3}>
+        {/* <button onClick={() => console.log(this.state)}>show state</button> */}
+        <Grid.Row>
+          <Grid.Column width={3}>
+            <VenueList
+              postEvent={this.postEvent}
+              fetchConcerts={this.fetchConcerts}
+            />
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <ConcertList
+              concerts={this.state.concerts}
+              setConcert={this.setConcert}
+            />
+          </Grid.Column>
+          <Grid.Column width={7}>
+            {this.state.currentConcert ? (
+              <ConcertDetails
+                concert={this.findConcert(this.state.currentConcert)}
               />
-            </Grid.Column>
-            <Grid.Column width={7}>
-              {this.state.currentConcert ? (
-                <ConcertDetails
-                  concert={this.findConcert(this.state.currentConcert)}
-                />
-              ) : null}
-            </Grid.Column>
-            <Grid.Column width={2} />
-          </Grid.Row>
-        </Grid>
-      </div>
+            ) : null}
+          </Grid.Column>
+          <Grid.Column width={2} />
+        </Grid.Row>
+      </Grid>
     );
   }
 }

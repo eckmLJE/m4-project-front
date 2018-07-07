@@ -12,11 +12,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Menu>
-          <Menu.Item header as="h2">
-            TICKETS TICKETS TICKETS
-          </Menu.Item>
-        </Menu>
+        
         <TicketsContainer />
       </div>
     );

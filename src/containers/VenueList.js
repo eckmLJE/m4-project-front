@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { Menu, Header, Container } from "semantic-ui-react";
+import { Menu, Header, Container, Button } from "semantic-ui-react";
+
+import NewCustomEvent from "../components/NewCustomEvent";
 
 class VenueList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        activeItem: "theAnthem"
+      activeItem: "theAnthem",
+      createCustom: false
     };
   }
 
@@ -18,6 +21,7 @@ class VenueList extends Component {
     const { activeItem } = this.state;
     return (
       <Container>
+        <br />
         <Header as="h4">VENUES</Header>
         <Menu fluid vertical>
           <Menu.Item
@@ -56,6 +60,16 @@ class VenueList extends Component {
             Rock and Roll Hotel
           </Menu.Item>
         </Menu>
+        <br />
+        <Header as="h5">Can't find what you're looking for?</Header>
+        <Button primary
+          onClick={() => {
+            this.setState({ createCustom: !this.state.createCustom });
+          }}
+        >
+          Create Custom Plan
+        </Button>
+        {this.state.createCustom ? <NewCustomEvent postEvent={this.props.postEvent}/> : null}
       </Container>
     );
   }
