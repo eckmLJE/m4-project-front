@@ -11,6 +11,7 @@ const ConcertDetails = props => {
         <Image
           src={props.concert.images.find(image => image.width > 600).url}
         />
+        <br />
         <Button fluid primary>
           Start a Plan
         </Button>

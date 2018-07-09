@@ -32,7 +32,7 @@ class PlansList extends Component {
                 onClick={this.setPlan}
               >
                 <Header as="h4">{plan.attributes.name}</Header>
-                <p>{moment("2018-06-01").format("MMMM Do, YYYY")}</p>
+                <p>{moment(plan.attributes.date).format("MMMM Do, YYYY")}</p>
               </Menu.Item>
             ))
           ) : (
