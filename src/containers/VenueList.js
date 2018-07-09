@@ -67,7 +67,7 @@ class VenueList extends Component {
             this.setState({ createCustom: !this.state.createCustom });
           }}
         >
-          Create Custom Plan
+          Start a Custom Plan
         </Button>
         {this.state.createCustom ? <NewCustomEvent postEvent={this.props.postEvent}/> : null}
       </Container>

@@ -10,10 +10,13 @@ class Home extends Component {
   }
   render() {
     return (
-        <Container>
-          Welcome
-          <Login />
-        </Container>
+      <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <Login />
+      </div>
     );
   }
 }

@@ -57,7 +57,7 @@ class NewCustomEvent extends Component {
           }
           primary
         >
-          Create Plan
+          Start Plan
         </Button>
       </div>
     );
