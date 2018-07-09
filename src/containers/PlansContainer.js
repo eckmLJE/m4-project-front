@@ -11,25 +11,26 @@ class PlansContainer extends Component {
     super(props);
     this.state = {
       plans: [],
-      user: [],
+      users: [],
       currentPlan: null
     };
   }
 
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name });
-    this.props.fetchConcerts(name);
-  };
-
   fetchPlans = () => {
     fetch(plansUrl)
-      .then(res => res.json())
-      .then(json =>
+      .then((res) => res.json())
+      .then((json) =>
         this.setState({
           plans: json.data,
           users: json.included
         })
       );
+  };
+
+  setPlan = (id) => {
+    this.setState({
+      currentPlan: this.state.plans.find((plan) => plan.id === id)
+    });
   };
 
   componentDidMount = () => {
@@ -42,15 +43,20 @@ class PlansContainer extends Component {
         <Grid.Row>
           <Grid.Column width={4}>
             <PlansList
-              setPlan={this.handleItemClick}
+              planState={this.state}
+              setPlan={this.setPlan}
               plans={this.state.plans}
             />
           </Grid.Column>
           <Grid.Column width={8}>
-            {this.state.currentPlan ? <PlanDetails /> : null}
+            {this.state.currentPlan ? (
+              <PlanDetails
+                plan={this.state.currentPlan}
+                allUsers={this.state.users}
+              />
+            ) : null}
           </Grid.Column>
-          <Grid.Column width={4}>
-          </Grid.Column>
+          <Grid.Column width={4} />
         </Grid.Row>
       </Grid>
     );

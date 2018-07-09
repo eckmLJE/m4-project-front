@@ -2,26 +2,24 @@ import React from "react";
 import { Container, Header, Segment, Image } from "semantic-ui-react";
 import moment from "moment";
 
-const PlanDetails = props => {
+const PlanDetails = (props) => {
+  // let relatedUsers = [];
+  // props.plan.relationships.users.data.forEach((user) => {
+  //   relatedUsers.push(
+  //     props.allUsers.find((foundUser) => foundUser.id === user.id)
+  //   );
+  // });
+
   return (
     <Container>
       <br />
-      <Header as="h4">CONCERT DETAIL</Header>
-      <Segment>
-        <Image
-          src={props.concert.images.find(image => image.width > 600).url}
-        />
-      </Segment>
-      <Segment>
-        <h4>{props.concert.name}</h4>
-        <p>Venue: {props.concert._embedded.venues[0].name}</p>
-        <p>
-          Date:{" "}
-          {moment(props.concert.dates.start.localDate).format("MMMM Do, YYYY")}
-        </p>
-      </Segment>
+      <Header as="h1">PLAN DETAIL</Header>
+      {console.log(props)}
+      <h2>{props.plan.attributes.name}</h2>
+      <h3>{props.plan.attributes.venue}</h3>
+      <h3>{props.plan.attributes.date}</h3>
     </Container>
   );
 };
 
-export default PlanDetails
+export default PlanDetails;
