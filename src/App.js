@@ -11,9 +11,9 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false,
-      currentUser: "",
-      currentUserId: ""
+      loggedIn: true,
+      currentUsername: "Alice",
+      currentUserId: "1"
     };
   }
 
@@ -21,8 +21,8 @@ class App extends Component {
     this.setState({ loggedIn: true });
   };
 
-  setCurrentUser = (username, id) => {
-    this.setState({ currentUser: username, currentUserId: id });
+  setCurrentUsername = (username, id) => {
+    this.setState({ currentUsername: username, currentUserId: id });
   };
 
   render() {
@@ -34,7 +34,7 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={() => <Home loggedIn={loggedIn} logIn={this.logIn} setUser={this.setCurrentUser} currentUser={this.state.currentUser}/>}
+            render={() => <Home loggedIn={loggedIn} logIn={this.logIn} setUser={this.setCurrentUser} currentUsername={this.state.currentUsername}/>}
           />
           <Route
             exact
@@ -44,7 +44,7 @@ class App extends Component {
           <Route
             exact
             path="/plans"
-            render={() => <PlansContainer loggedIn={loggedIn} />}
+            render={() => <PlansContainer loggedIn={loggedIn} currentUserId={this.state.currentUserId}/>}
           />
         </div>
       </Router>

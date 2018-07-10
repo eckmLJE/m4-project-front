@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Container } from "semantic-ui-react";
 
 import Login from "../components/Login";
 
@@ -15,9 +16,15 @@ class Home extends Component {
         <br />
         <br />
         {this.props.loggedIn ? (
-          <h4>Welcome Back {this.props.currentUser}!</h4>
+          <Container>
+            <h2>Welcome Back, {this.props.currentUsername}!</h2>
+          </Container>
         ) : (
-          <Login setUser={this.props.setUser} loggedIn={this.props.loggedIn} logIn={this.props.logIn} />
+          <Login
+            setUser={this.props.setUser}
+            loggedIn={this.props.loggedIn}
+            logIn={this.props.logIn}
+          />
         )}
       </div>
     );

@@ -6,6 +6,7 @@ import PlanDetails from "../components/PlanDetails";
 import PlanFriends from "../components/PlanFriends";
 
 const plansUrl = "http://localhost:3000/api/v1/events";
+const commentsUrl = "http://localhost:3000/api/v1/comments";
 
 class PlansContainer extends Component {
   constructor() {
@@ -13,12 +14,13 @@ class PlansContainer extends Component {
     this.state = {
       plans: [],
       users: [],
+      comments: [],
       currentPlan: null
     };
   }
 
   fetchPlans = () => {
-    let token = localStorage.getItem("token")
+    let token = localStorage.getItem("token");
     fetch(plansUrl, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -28,7 +30,10 @@ class PlansContainer extends Component {
       .then(json =>
         this.setState({
           plans: json.data,
-          users: json.included
+          users: json.included.filter(included => included.type === "users"),
+          comments: json.included.filter(
+            included => included.type === "comments"
+          )
         })
       );
   };
@@ -41,6 +46,23 @@ class PlansContainer extends Component {
 
   componentDidMount = () => {
     this.fetchPlans();
+  };
+
+  postComment = content => {
+    let comment = {
+      user_id: this.props.currentUserId,
+      event_id: this.state.currentPlan.id,
+      content: content
+    };
+    let body = JSON.stringify(comment);
+    fetch(commentsUrl, {
+      method: "POST",
+      body: body,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    }).then(this.fetchPlans);
   };
 
   findUsersByIds = arr => {
@@ -67,7 +89,13 @@ class PlansContainer extends Component {
               </Grid.Column>
               <Grid.Column width={6}>
                 {this.state.currentPlan ? (
-                  <PlanDetails plan={this.state.currentPlan} />
+                  <PlanDetails
+                    plan={this.state.currentPlan}
+                    comments={this.state.comments}
+                    users={this.state.users}
+                    currentUserId={this.props.currentUserId}
+                    postComment={this.postComment}
+                  />
                 ) : null}
               </Grid.Column>
               <Grid.Column width={6}>

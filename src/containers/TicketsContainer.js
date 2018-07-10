@@ -58,6 +58,7 @@ class TicketsContainer extends Component {
 
   postEvent = event => {
     let body = JSON.stringify(event);
+    console.log(body)
     fetch(eventsUrl, {
       method: "POST",
       body: body,
@@ -66,7 +67,6 @@ class TicketsContainer extends Component {
         Accept: "application/json"
       }
     });
-    // .then(() => window.history.pushState())
   };
 
   render() {
