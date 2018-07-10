@@ -49,6 +49,7 @@ class PlansContainer extends Component {
   render() {
     return (
       <div>
+        <br />
         {this.props.loggedIn ? (
           <Grid padded columns={4}>
             <Grid.Row>

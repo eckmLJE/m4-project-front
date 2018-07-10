@@ -11,7 +11,7 @@ const PlanFriends = props => {
       {foundFriends.length > 0 ? (
         <Segment>
           {foundFriends.map(user => (
-            <h2 key={user.id}>{user.attributes.name}</h2>
+            <h2 key={user.id}>{user.attributes.username}</h2>
           ))}
         </Segment>
       ) : (

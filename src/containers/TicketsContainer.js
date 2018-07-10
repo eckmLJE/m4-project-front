@@ -73,44 +73,47 @@ class TicketsContainer extends Component {
     return (
       <div>
         {this.props.loggedIn ? (
-          <Grid padded columns={3}>
-            {/* <button onClick={() => console.log(this.state)}>show state</button> */}
-            <Grid.Row>
-              <Grid.Column width={2}>
-                <VenueList
-                  postEvent={this.postEvent}
-                  fetchConcerts={this.fetchConcerts}
-                />
-              </Grid.Column>
-              <Grid.Column width={4}>
-                <ConcertList
-                  concerts={this.state.concerts}
-                  setConcert={this.setConcert}
-                />
-              </Grid.Column>
-              <Grid.Column width={5}>
-                {this.state.currentConcert ? (
-                  <ConcertDetails
-                    concert={this.findConcert(this.state.currentConcert)}
+          <div>
+            <br />
+            <Grid padded columns={3}>
+              {/* <button onClick={() => console.log(this.state)}>show state</button> */}
+              <Grid.Row>
+                <Grid.Column width={3}>
+                  <VenueList
                     postEvent={this.postEvent}
+                    fetchConcerts={this.fetchConcerts}
                   />
-                ) : null}
-              </Grid.Column>
-              <Grid.Column width={5}>
-                {this.state.currentConcert ? (
-                  <TicketsNow
-                    concert={this.findConcert(this.state.currentConcert)}
+                </Grid.Column>
+                <Grid.Column width={3}>
+                  <ConcertList
+                    concerts={this.state.concerts}
+                    setConcert={this.setConcert}
                   />
-                ) : null}
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
+                </Grid.Column>
+                <Grid.Column width={5}>
+                  {this.state.currentConcert ? (
+                    <ConcertDetails
+                      concert={this.findConcert(this.state.currentConcert)}
+                      postEvent={this.postEvent}
+                    />
+                  ) : null}
+                </Grid.Column>
+                <Grid.Column width={5}>
+                  {this.state.currentConcert ? (
+                    <TicketsNow
+                      concert={this.findConcert(this.state.currentConcert)}
+                    />
+                  ) : null}
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </div>
         ) : (
           <div>
             <br />
             <br />
             <br />
-            <br/>
+            <br />
             <Container>
               <h3>You are not currently logged in.</h3>
             </Container>
