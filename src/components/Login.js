@@ -10,16 +10,26 @@ class Login extends Component {
     };
   }
 
-  usernameChange = data => {
-    this.setState({
-      username: data
-    });
-  };
+  login = e => {
+    e.preventDefault();
 
-  passwordChange = data => {
-    this.setState({
-      password: data
-    });
+    let params = {
+      username: this.state.username,
+      password: this.state.password
+    };
+
+    let url = "http://localhost:3000/login";
+
+    fetch(url, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(params)
+    })
+      .then(res => res.json())
+      .then(res => {
+        localStorage.setItem("token", res.token);
+        this.props.logIn();
+      });
   };
 
   render() {
@@ -28,17 +38,17 @@ class Login extends Component {
         <h4>Please Log In to Use ConcertPlan</h4>
         <Input>
           <Input
-            onChange={(e, d) => this.usernameChange(d.value)}
+            onChange={(e, d) => this.setState({ username: d.value })}
             placeholder="Username"
             value={this.state.username}
           />
           <Input
             type="password"
-            onChange={(e, d) => this.passwordChange(d.value)}
+            onChange={(e, d) => this.setState({ password: d.value })}
             placeholder="Password"
             value={this.state.password}
           />
-          <Button> Login </Button>
+          <Button onClick={this.login} > Login </Button>
         </Input>
       </Container>
     );

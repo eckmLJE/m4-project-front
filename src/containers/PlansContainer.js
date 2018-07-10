@@ -8,8 +8,8 @@ import PlanFriends from "../components/PlanFriends";
 const plansUrl = "http://localhost:3000/api/v1/events";
 
 class PlansContainer extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       plans: [],
       users: [],
