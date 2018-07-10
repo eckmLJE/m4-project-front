@@ -1,6 +1,5 @@
 import React from "react";
-import { Container, Header, Segment, Image } from "semantic-ui-react";
-import moment from "moment";
+import { Container, Header, Segment } from "semantic-ui-react";
 
 const PlanDetails = props => {
   

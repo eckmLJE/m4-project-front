@@ -27,8 +27,10 @@ class Login extends Component {
     })
       .then(res => res.json())
       .then(res => {
+        console.log(res);
         localStorage.setItem("token", res.token);
-        this.props.logIn();
+        this.props.logIn()
+        this.props.setUser(res.username, res.id);
       });
   };
 
@@ -48,7 +50,7 @@ class Login extends Component {
             placeholder="Password"
             value={this.state.password}
           />
-          <Button onClick={this.login} > Login </Button>
+          <Button onClick={this.login}> Login </Button>
         </Input>
       </Container>
     );

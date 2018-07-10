@@ -18,7 +18,12 @@ class PlansContainer extends Component {
   }
 
   fetchPlans = () => {
-    fetch(plansUrl)
+    let token = localStorage.getItem("token")
+    fetch(plansUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then(res => res.json())
       .then(json =>
         this.setState({

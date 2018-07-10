@@ -11,12 +11,18 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: true
+      loggedIn: false,
+      currentUser: "",
+      currentUserId: ""
     };
   }
 
   logIn = () => {
     this.setState({ loggedIn: true });
+  };
+
+  setCurrentUser = (username, id) => {
+    this.setState({ currentUser: username, currentUserId: id });
   };
 
   render() {
@@ -28,7 +34,7 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={() => <Home loggedIn={loggedIn} logIn={this.logIn} />}
+            render={() => <Home loggedIn={loggedIn} logIn={this.logIn} setUser={this.setCurrentUser} currentUser={this.state.currentUser}/>}
           />
           <Route
             exact
