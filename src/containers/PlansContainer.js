@@ -51,6 +51,7 @@ class PlansContainer extends Component {
       user_id: this.props.currentUserId
     };
     let body = JSON.stringify(userPlan);
+    console.log(body);
     fetch(updatePlanUrl, {
       method: "POST",
       body: body,
