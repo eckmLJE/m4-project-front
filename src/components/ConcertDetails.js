@@ -1,36 +1,57 @@
-import React from "react";
+import React, { Component } from "react";
 import { Container, Image, Header, Segment, Button } from "semantic-ui-react";
 import moment from "moment";
 
-const ConcertDetails = props => {
-  return (
-    <Container>
-      <br />
-      <Header as="h4">CONCERT DETAIL</Header>
-      <Segment style={{ height: "85vh", overflowY: "scroll" }}>
-        <Image
-          src={props.concert.images.find(image => image.width > 600).url}
-        />
+class ConcertDetails extends Component {
+  constructor() {
+    super();
+    this.state = {
+      concertCreated: false
+    };
+  }
+
+  handleSubmit = () => {
+    this.props.postEvent({
+      name: this.props.concert.name,
+      venue: this.props.concert._embedded.venues[0].name,
+      date: this.props.concert.dates.start.localDate
+    });
+    this.setState({
+      concertCreated: true
+    });
+  };
+
+  render() {
+    return (
+      <Container>
         <br />
-        <Button fluid primary>
-          Start a Plan
-        </Button>
-        <h4>{props.concert.name}</h4>
-        <p>Venue: {props.concert._embedded.venues[0].name}</p>
-        <p>
-          Date:{" "}
-          {moment(props.concert.dates.start.localDate).format("MMMM Do, YYYY")}
-        </p>
-        <p>Time: {props.concert.dates.start.localTime}</p>
-        <iframe
-          title="tickets"
-          width="100%"
-          height="500px"
-          src={props.concert.url}
-        />
-      </Segment>
-    </Container>
-  );
-};
+        <Header as="h4">CONCERT DETAIL</Header>
+        <Segment style={{ height: "75vh", overflowY: "scroll" }}>
+          <Image
+            src={this.props.concert.images.find(image => image.width > 600).url}
+          />
+          <br />
+          {this.state.concertCreated ? (
+            <h4>Plan Created! Find it on PLANS</h4>
+          ) : (
+            <Button onClick={this.handleSubmit} fluid primary>
+              Start a Plan
+            </Button>
+          )}
+
+          <h4>{this.props.concert.name}</h4>
+          <p>Venue: {this.props.concert._embedded.venues[0].name}</p>
+          <p>
+            Date:{" "}
+            {moment(this.props.concert.dates.start.localDate).format(
+              "MMMM Do, YYYY"
+            )}
+          </p>
+          <p>Time: {this.props.concert.dates.start.localTime}</p>
+        </Segment>
+      </Container>
+    );
+  }
+}
 
 export default ConcertDetails;

@@ -20,17 +20,17 @@ class PlansList extends Component {
     return (
       <Container className="planList">
         <br />
-        <button onClick={() => console.log(this.props.planState)} />
         <Header as="h4">PLANS</Header>
         <Menu fluid vertical>
           {this.props.plans ? (
-            this.props.plans.map((plan) => (
+            this.props.plans.map(plan => (
               <Menu.Item
                 active={activeItem === plan.id}
                 className="plan-list-item"
                 key={plan.id}
                 name={plan.id}
-                onClick={this.handleItemClick}>
+                onClick={this.handleItemClick}
+              >
                 <Header as="h4">{plan.attributes.name}</Header>
                 <p>{moment(plan.attributes.date).format("MMMM Do, YYYY")}</p>
               </Menu.Item>

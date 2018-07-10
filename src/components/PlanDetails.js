@@ -2,22 +2,17 @@ import React from "react";
 import { Container, Header, Segment, Image } from "semantic-ui-react";
 import moment from "moment";
 
-const PlanDetails = (props) => {
-  // let relatedUsers = [];
-  // props.plan.relationships.users.data.forEach((user) => {
-  //   relatedUsers.push(
-  //     props.allUsers.find((foundUser) => foundUser.id === user.id)
-  //   );
-  // });
-
+const PlanDetails = props => {
+  
   return (
     <Container>
       <br />
-      <Header as="h1">PLAN DETAIL</Header>
-      {console.log(props)}
-      <h2>{props.plan.attributes.name}</h2>
-      <h3>{props.plan.attributes.venue}</h3>
-      <h3>{props.plan.attributes.date}</h3>
+      <Header as="h4">PLAN DETAIL</Header>
+      <Segment>
+        <h5>{props.plan.attributes.name}</h5>
+        <p>{props.plan.attributes.venue}</p>
+        <p>{props.plan.attributes.date}</p>
+      </Segment>
     </Container>
   );
 };

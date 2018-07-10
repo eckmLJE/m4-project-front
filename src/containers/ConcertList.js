@@ -19,7 +19,7 @@ class ConcertList extends Component {
       <Container className="concertList">
         <br />
         <Header as="h4">CONCERTS</Header>
-        <Segment style={{ height: "85vh", overflowY: "scroll" }}>
+        <Segment style={{ height: "75vh", overflowY: "scroll" }}>
           <Menu fluid vertical>
             {this.props.concerts.map(concert => (
               <Menu.Item

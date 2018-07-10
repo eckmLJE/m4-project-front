@@ -15,7 +15,11 @@ class Home extends Component {
         <br />
         <br />
         <br />
-        <Login />
+        {this.props.loggedIn ? (
+          <h4>Welcome Back!</h4>
+        ) : (
+          <Login loggedIn={this.props.loggedIn} logIn={this.props.logIn} />
+        )}
       </div>
     );
   }
