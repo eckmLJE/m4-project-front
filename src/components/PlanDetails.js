@@ -3,8 +3,6 @@ import { Container, Header, Segment, Divider, Button } from "semantic-ui-react";
 
 import NewComment from "./NewComment";
 
-
-
 class PlanDetails extends Component {
   constructor() {
     super();
@@ -14,7 +12,7 @@ class PlanDetails extends Component {
   }
 
   handleComment = content => {
-    this.props.postComment(content)
+    this.props.postComment(content);
     this.setState({ createComment: false });
   };
 
@@ -27,6 +25,14 @@ class PlanDetails extends Component {
         <br />
         <Header as="h4">PLAN DETAIL</Header>
         <Segment>
+          <Button
+            onClick={this.props.updatePlan}
+            size="huge"
+            style={{ position: "absolute", right: "0" }}
+            secondary
+          >
+            Join Plan
+          </Button>
           <h3>{this.props.plan.attributes.name}</h3>
           <h4>{this.props.plan.attributes.venue}</h4>
           <h4>{this.props.plan.attributes.date}</h4>

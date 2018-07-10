@@ -6,6 +6,7 @@ import PlanDetails from "../components/PlanDetails";
 import PlanFriends from "../components/PlanFriends";
 
 const plansUrl = "http://localhost:3000/api/v1/events";
+const updatePlanUrl = "http://localhost:3000/api/v1/updateplan";
 const commentsUrl = "http://localhost:3000/api/v1/comments";
 
 class PlansContainer extends Component {
@@ -42,6 +43,22 @@ class PlansContainer extends Component {
     this.setState({
       currentPlan: this.state.plans.find(plan => plan.id === id)
     });
+  };
+
+  updatePlan = () => {
+    let userPlan = {
+      id: this.state.currentPlan.id,
+      user_id: this.props.currentUserId
+    };
+    let body = JSON.stringify(userPlan);
+    fetch(updatePlanUrl, {
+      method: "POST",
+      body: body,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    }).then(this.fetchPlans);
   };
 
   componentDidMount = () => {
@@ -95,6 +112,7 @@ class PlansContainer extends Component {
                     users={this.state.users}
                     currentUserId={this.props.currentUserId}
                     postComment={this.postComment}
+                    updatePlan={this.updatePlan}
                   />
                 ) : null}
               </Grid.Column>
