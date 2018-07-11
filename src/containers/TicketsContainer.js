@@ -58,7 +58,7 @@ class TicketsContainer extends Component {
 
   postEvent = event => {
     let body = JSON.stringify(event);
-    console.log(body)
+    console.log(body);
     fetch(eventsUrl, {
       method: "POST",
       body: body,
@@ -82,6 +82,7 @@ class TicketsContainer extends Component {
                   <VenueList
                     postEvent={this.postEvent}
                     fetchConcerts={this.fetchConcerts}
+                    currentUserId={this.props.currentUserId}
                   />
                 </Grid.Column>
                 <Grid.Column width={3}>
@@ -95,6 +96,7 @@ class TicketsContainer extends Component {
                     <ConcertDetails
                       concert={this.findConcert(this.state.currentConcert)}
                       postEvent={this.postEvent}
+                      currentUserId={this.props.currentUserId}
                     />
                   ) : null}
                 </Grid.Column>

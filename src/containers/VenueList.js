@@ -62,14 +62,20 @@ class VenueList extends Component {
         </Menu>
         <br />
         <Header as="h5">Can't find what you're looking for?</Header>
-        <Button primary
+        <Button
+          secondary
           onClick={() => {
             this.setState({ createCustom: !this.state.createCustom });
           }}
         >
           Start a Custom Plan
         </Button>
-        {this.state.createCustom ? <NewCustomEvent postEvent={this.props.postEvent}/> : null}
+        {this.state.createCustom ? (
+          <NewCustomEvent
+            currentUserId={this.props.currentUserId}
+            postEvent={this.props.postEvent}
+          />
+        ) : null}
       </Container>
     );
   }

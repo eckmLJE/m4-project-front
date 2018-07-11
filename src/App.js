@@ -30,21 +30,38 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route path="/" component={Navbar} />
+          <Route path="/" render={() => <Navbar loggedIn={loggedIn} />} />
           <Route
             exact
             path="/"
-            render={() => <Home loggedIn={loggedIn} logIn={this.logIn} setUser={this.setCurrentUser} currentUsername={this.state.currentUsername}/>}
+            render={() => (
+              <Home
+                loggedIn={loggedIn}
+                logIn={this.logIn}
+                setUser={this.setCurrentUser}
+                currentUsername={this.state.currentUsername}
+              />
+            )}
           />
           <Route
             exact
             path="/concerts"
-            render={() => <TicketsContainer loggedIn={loggedIn} />}
+            render={() => (
+              <TicketsContainer
+                loggedIn={loggedIn}
+                currentUserId={this.state.currentUserId}
+              />
+            )}
           />
           <Route
             exact
             path="/plans"
-            render={() => <PlansContainer loggedIn={loggedIn} currentUserId={this.state.currentUserId}/>}
+            render={() => (
+              <PlansContainer
+                loggedIn={loggedIn}
+                currentUserId={this.state.currentUserId}
+              />
+            )}
           />
         </div>
       </Router>

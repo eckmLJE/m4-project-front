@@ -22,7 +22,8 @@ class NewCustomEvent extends Component {
     this.props.postEvent({
       name: this.state.eventName,
       venue: this.state.eventVenue,
-      date: this.state.eventDate
+      date: this.state.eventDate,
+      user_id: this.props.currentUserId
     })
     this.setState({
       planCreated: true

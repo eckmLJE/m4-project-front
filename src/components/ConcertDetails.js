@@ -14,7 +14,8 @@ class ConcertDetails extends Component {
     this.props.postEvent({
       name: this.props.concert.name,
       venue: this.props.concert._embedded.venues[0].name,
-      date: this.props.concert.dates.start.localDate
+      date: this.props.concert.dates.start.localDate,
+      user_id: this.props.currentUserId
     });
     this.setState({
       concertCreated: true
@@ -34,7 +35,7 @@ class ConcertDetails extends Component {
           {this.state.concertCreated ? (
             <h4>Plan Created! Find it on PLANS</h4>
           ) : (
-            <Button onClick={this.handleSubmit} fluid primary>
+            <Button onClick={this.handleSubmit} fluid secondary>
               Start a Plan
             </Button>
           )}

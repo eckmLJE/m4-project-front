@@ -16,11 +16,13 @@ class PlansContainer extends Component {
       plans: [],
       users: [],
       comments: [],
-      currentPlan: null
+      currentPlan: null,
+      updated: false
     };
   }
 
   fetchPlans = () => {
+    console.log("fetchPlans reached");
     let token = localStorage.getItem("token");
     fetch(plansUrl, {
       headers: {
@@ -59,7 +61,8 @@ class PlansContainer extends Component {
         "Content-Type": "application/json",
         Accept: "application/json"
       }
-    }).then(this.fetchPlans);
+    })
+      .then(this.fetchPlans);
   };
 
   componentDidMount = () => {
